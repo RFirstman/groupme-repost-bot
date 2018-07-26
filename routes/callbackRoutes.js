@@ -1,4 +1,5 @@
 var curl = require("curlrequest");
+var axios = require("axios");
 
 const { bot_id, group_id } = require("../config/index");
 console.log(bot_id)
