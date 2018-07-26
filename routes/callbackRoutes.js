@@ -10,7 +10,7 @@ module.exports = app => {
     app.post("/callback", (req, res) => {
         console.log(req.body);
 
-        if (req.body.group_id === group_id) {
+        if (req.body.sender_id != bot_id) {
             console.log("sending message")
             /* axios.post("https://api.groupme.com/v3/bots/post", {
                 text: "I am repost bot.",
