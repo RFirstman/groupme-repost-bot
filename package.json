@@ -11,9 +11,9 @@
   "author": "Rob Firstman",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "curlrequest": "^1.0.1",
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "pixelmatch": "^4.0.2"
   }
 }

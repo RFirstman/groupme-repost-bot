@@ -1,21 +1,18 @@
 var curl = require("curlrequest");
-var axios = require("axios");
 
-const config = require("../config/index");
-console.log(config)
-let { bot_id, group_id } = config; 
-console.log(bot_id, group_id)
+const { bot_id, group_id } = require("../config/index");
+const galleryScanner = require("../services/galleryScanner");
 
 module.exports = app => {
     app.post("/callback", (req, res) => {
         console.log(req.body);
 
         if (req.body.sender_type != "bot") {
-            console.log("sending message")
-            /* axios.post("https://api.groupme.com/v3/bots/post", {
-                text: "I am repost bot.",
-                bot_id
-            }); */
+            let { attachments } = req.body;
+            if (attachments.length > 0) {
+                galleryScanner(attachments[0], req.body.group_id);
+            }
+
             var options = {
                 method: "POST",
                 url: "https://api.groupme.com/v3/bots/post",

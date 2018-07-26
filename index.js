@@ -7,7 +7,7 @@ app.use(bodyParser.json());
 
 require("./routes/callbackRoutes")(app);
 
-port = process.env.PORT || 8000;
+port = process.env.PORT || 3000;
 
 app.listen(port, () => {
     console.log("Server running on port: ", port);
