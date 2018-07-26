@@ -1,7 +1,9 @@
 var curl = require("curlrequest");
 var axios = require("axios");
 
-const { bot_id, group_id } = require("../config/index");
+const config = require("../config/index");
+console.log(config)
+let { bot_id, group_id } = config; 
 console.log(bot_id, group_id)
 
 module.exports = app => {
