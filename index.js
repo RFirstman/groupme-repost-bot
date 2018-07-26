@@ -4,7 +4,7 @@ var bodyParser = require("body-parser");
 
 require("./routes/callbackRoutes")(app);
 
-app.use(bodyParser.urlencoded({ extended: false }))
+//app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 
 port = process.env.PORT || 8000;
