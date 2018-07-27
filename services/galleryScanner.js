@@ -39,7 +39,17 @@ async function processImages(imageUrls, callback) {
                     compareImages(paths[0], paths[numImages - 1], (err, results) => {
                         if (err) {
                             console.log("Error comparing: ", err)
-                            reject(err);
+                            compareImages(paths[0], paths[numImages - 1], (err, results) => {
+                                if (err) {
+                                    console.log("Error comparing: ", err)
+                                    reject(err);
+                                } else {
+                                    console.log(results)
+                                    if (results.misMatchPercentage < 20) {
+                                        callback(true, results.misMatchPercentage);
+                                    }
+                                }
+                            });
                         } else {
                             console.log(results)
                             if (results.misMatchPercentage < 20) {
