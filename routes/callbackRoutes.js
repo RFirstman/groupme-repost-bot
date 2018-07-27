@@ -10,20 +10,31 @@ module.exports = app => {
         if (req.body.sender_type != "bot") {
             let { attachments } = req.body;
             if (attachments.length > 0) {
-                galleryScanner(attachments[0], req.body.group_id);
-            }
+                galleryScanner(req.body.group_id, (isPotentiallyRepost, misMatchPercentage) => {
+                    console.log(isPotentiallyRepost, misMatchPercentage)
+                    let text;
+                    if (isPotentiallyRepost) {
+                        if (misMatchPercentage < 5) {
+                            // DEFINITELY a repost
+                            text = "REPOST"
+                        } else {
+                            text = "Probably a repost"
+                        }
 
-            var options = {
-                method: "POST",
-                url: "https://api.groupme.com/v3/bots/post",
-                data: { text: "hello!", bot_id }
-            };
-    
-            curl.request(options, function(error, response) {
-                if (error) {
-                    console.log(error);
-                }
-            });
+                        var options = {
+                            method: "POST",
+                            url: "https://api.groupme.com/v3/bots/post",
+                            data: { text, bot_id }
+                        };
+
+                        curl.request(options, function (error, response) {
+                            if (error) {
+                                console.log(error);
+                            }
+                        });
+                    }
+                });
+            }
         }
         res.sendStatus(200);
     });
